@@ -6,13 +6,15 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:33:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/01 20:49:20 by ls               ###   ########.fr       */
+/*   Updated: 2024/06/03 19:34:27 by tblagoev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
+
 char *new_line(*storage)
 {
-	char	*line;
+º	char	*line;
 	char	*ptr;
 	int		len;
 
@@ -62,7 +64,15 @@ char	*get_next_line(int fd)
 	if (!line)
 		return(ft_free(&storage));
 	storage = clean_storage(storage);
-	return(line);
+	return(line);		
+}
+
+int	main()
+{
+	int	fd = open(texto.txt, O_RDONLY);
+	printf("%s", get_next_line(fd));
+
+	return (0);
 }
 /*
 
