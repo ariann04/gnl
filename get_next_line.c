@@ -6,19 +6,43 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:33:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/03 19:34:27 by tblagoev         ###   ########.fr       */
+/*   Updated: 2024/06/07 19:41:08 by tblagoev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+char	*cut_storage(char *storage)
+{
+	char	*ptr;
+	char	*remind;
+	int	len;
+
+	ptr = ft_strchr(storage, '\n');
+	if (!ptr)
+	{
+		remind = NULL;
+		return (free(storage, NULL));
+	}
+	else
+		len = (ptr - storage) + 1;
+	remind = ft_substr(storage, len, (ft_strlen(storage) - len));
+	if (!storage)
+
+}
+
 char *new_line(*storage)
 {
-º	char	*line;
+	char	*line;
 	char	*ptr;
-	int		len;
+	int	len;
 
-	ptr = 
+	ptr = ft_strchr(storage, '\n');
+	len = (ptr - storage) + 1;
+	line = ft_substr(storage, 0, len);
+	if (!line)
+		return (NULL);
+	return (line);
 }
 
 char	*readbuf(int fd, char *storage)
@@ -62,16 +86,21 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = new_line(storage);
 	if (!line)
-		return(ft_free(&storage));
-	storage = clean_storage(storage);
+	{
+		free(storage);
+		return(NULL);
+	}
+	storage = cut_storage(storage);
 	return(line);		
 }
 
 int	main()
 {
 	int	fd = open(texto.txt, O_RDONLY);
-	printf("%s", get_next_line(fd));
+	while ()
+	{
 
+	}
 	return (0);
 }
 /*
