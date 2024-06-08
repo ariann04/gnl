@@ -1,4 +1,2 @@
-
-hola, que tal?
-yo bien, y tu?
-12345678910
+Hola que tal?
+Yo bien gracias

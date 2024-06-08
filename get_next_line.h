@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:44:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/03 17:49:40 by tblagoev         ###   ########.fr       */
+/*   Updated: 2024/06/08 23:38:24 by ls               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@
 #include <stdlib.h>
 
 char	*get_next_line(int fd);
+char	*readbuf(char *storage, int fd);
+char	*new_line(char *storage);
+int		*ft_strlen(char *str);
 char	*ft_strjoin(char *storage, char *buffer);
-int	ft_strlen(char *str);
-
+char	*strchr(char *storage, char c);
+char	*ft_substr(char *storage, int start, int len);
+int		ft_strlen(char *str);
 #endif

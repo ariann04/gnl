@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:33:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/07 19:41:08 by tblagoev         ###   ########.fr       */
+/*   Updated: 2024/06/08 23:41:46 by ls               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,11 @@ char	*cut_storage(char *storage)
 		len = (ptr - storage) + 1;
 	remind = ft_substr(storage, len, (ft_strlen(storage) - len));
 	if (!storage)
-
+		return (free(storage), NULL);
+	return (remind);
 }
 
-char *new_line(*storage)
+char *new_line(char *storage)
 {
 	char	*line;
 	char	*ptr;
@@ -39,6 +40,7 @@ char *new_line(*storage)
 
 	ptr = ft_strchr(storage, '\n');
 	len = (ptr - storage) + 1;
+	printf("%i", len);
 	line = ft_substr(storage, 0, len);
 	if (!line)
 		return (NULL);
@@ -50,7 +52,6 @@ char	*readbuf(int fd, char *storage)
 	char	*buffer;
 	int		status;
 
-	status = 1;
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	status = 1;
 	if (!buffer)
@@ -78,7 +79,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0)
 		return (NULL);
-	if ((storage && !ft_strchr(strorage, '\n')) || !storage)
+	if ((storage && !ft_strchr(storage, '\n')) || !storage)
 	{
 		storage = readbuf(fd, storage);
 	}
@@ -97,7 +98,7 @@ char	*get_next_line(int fd)
 int	main()
 {
 	int	fd = open(texto.txt, O_RDONLY);
-	while ()
+	while (fd != EOF)
 	{
 
 	}
