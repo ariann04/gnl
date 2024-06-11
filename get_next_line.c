@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:33:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/09 00:15:06 by ls               ###   ########.fr       */
+/*   Updated: 2024/06/11 18:37:59 by tblagoev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*cut_storage(char *storage)
 	}
 	else
 		len = (ptr - storage) + 1;
-	remind = ft_substr(storage, len, ft_strlen(storage) - (int)len);
+	remind = ft_substr(storage, len, (ft_strlen(storage) - len));
 	if (!storage)
 		return (free(storage), NULL);
 	return (remind);
@@ -40,7 +40,7 @@ char *new_line(char *storage)
 
 	ptr = ft_strchr(storage, '\n');
 	len = (ptr - storage) + 1;
-	printf("%i", len);
+	printf("%i\n", len);
 	line = ft_substr(storage, 0, len);
 	if (!line)
 		return (NULL);
@@ -68,7 +68,7 @@ char	*readbuf(int fd, char *storage)
 	}
 	free(buffer);
 	if (status == -1)
-		return (free(storage));
+		return (free(storage), NULL);
 	return (storage);
 }
 
@@ -97,7 +97,7 @@ char	*get_next_line(int fd)
 
 int	main()
 {
-	int		fd = open("texto.txt", O_RDONLY);
+	int	fd = open("texto.txt", O_RDONLY);
 	char	*line;
 	if (fd < 0)
 	{
