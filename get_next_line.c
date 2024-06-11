@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:33:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/11 18:37:59 by tblagoev         ###   ########.fr       */
+/*   Updated: 2024/06/11 19:16:18 by tblagoev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ char	*cut_storage(char *storage)
 		remind = NULL;
 		return (free(storage), NULL);
 	}
-	else
-		len = (ptr - storage) + 1;
+	len = (ptr - storage) + 1;
 	remind = ft_substr(storage, len, (ft_strlen(storage) - len));
 	if (!storage)
 		return (free(storage), NULL);
@@ -97,7 +96,7 @@ char	*get_next_line(int fd)
 
 int	main()
 {
-	int	fd = open("texto.txt", O_RDONLY);
+	int	fd = open("text.txt", O_RDONLY);
 	char	*line;
 	if (fd < 0)
 	{

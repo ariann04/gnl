@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:10:07 by ls                #+#    #+#             */
-/*   Updated: 2024/06/11 18:39:23 by tblagoev         ###   ########.fr       */
+/*   Updated: 2024/06/11 19:24:55 by tblagoev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_strlen(char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (*str != 0)
 	{
 		i++;
@@ -48,7 +50,9 @@ char	*ft_strjoin(char *storage, char *buffer)
 
 	str = malloc(sizeof(char) *
 			(ft_strlen(buffer) + ft_strlen(storage) + 1));
-	if (!str)
+	if (!storage && !buffer)
+		return (NULL);
+	if (!storage)
 		return (NULL);
 	temp = str;
 	while (*storage)
