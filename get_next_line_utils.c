@@ -6,9 +6,11 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:10:07 by ls                #+#    #+#             */
-/*   Updated: 2024/06/06 19:00:59 by tblagoev         ###   ########.fr       */
+/*   Updated: 2024/06/09 00:10:33 by ls               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "get_next_line.h"
 
 int	ft_strlen(char *str)
 {
@@ -30,20 +32,21 @@ char	*ft_strchr(char *storage, char c)
 	i = 0;
 	while (storage[i])
 	{
-		if (*storage[i] == c)
+		if (storage[i] == c)
 			return (storage);
 		i++;
 	}
 	if (c == '\0')
 		return (storage);
-	return (NULL);
+	return (0);
 }
+
 char	*ft_strjoin(char *storage, char *buffer)
 {
 	char	*str;
 	char	*temp;
 
-	str = malloc (sizeof(char) * ft_strlen(buffer) + ft_strlen(storage) + 1);
+	str = malloc(sizeof(char) * ft_strlen(buffer) + ft_strlen(storage) + 1);
 	if (!str)
 		return (NULL);
 	temp = str;
@@ -64,7 +67,7 @@ char	*ft_substr(char *storage, int start, int len)
 	i = 0;
 	if (!storage)
 		return (NULL);
-	str = malloc (sizeof(char) * (len + 1));
+	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
 	while (i < start && *storage)
@@ -75,7 +78,7 @@ char	*ft_substr(char *storage, int start, int len)
 	i = 0;
 	while (i < len && *storage)
 	{
-		str[i]= storage;
+		str[i] = storage;
 		i++;
 		storage++;
 	}

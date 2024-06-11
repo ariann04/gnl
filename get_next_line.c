@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:33:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/08 23:41:46 by ls               ###   ########.fr       */
+/*   Updated: 2024/06/09 00:15:06 by ls               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ char	*cut_storage(char *storage)
 	if (!ptr)
 	{
 		remind = NULL;
-		return (free(storage, NULL));
+		return (free(storage), NULL);
 	}
 	else
 		len = (ptr - storage) + 1;
-	remind = ft_substr(storage, len, (ft_strlen(storage) - len));
+	remind = ft_substr(storage, len, ft_strlen(storage) - (int)len);
 	if (!storage)
 		return (free(storage), NULL);
 	return (remind);
@@ -55,7 +55,7 @@ char	*readbuf(int fd, char *storage)
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	status = 1;
 	if (!buffer)
-		return (ft_free(storage));
+		return (free(storage), NULL);
 	buffer[0] = '\0';
 	while (status > 0 && !ft_strchr(buffer, '\n'))
 	{
@@ -68,7 +68,7 @@ char	*readbuf(int fd, char *storage)
 	}
 	free(buffer);
 	if (status == -1)
-		return (free(&storage));
+		return (free(storage));
 	return (storage);
 }
 
@@ -97,11 +97,19 @@ char	*get_next_line(int fd)
 
 int	main()
 {
-	int	fd = open(texto.txt, O_RDONLY);
-	while (fd != EOF)
+	int		fd = open("texto.txt", O_RDONLY);
+	char	*line;
+	if (fd < 0)
 	{
-
+		perror("Error al abrir el archivo");
+		return (1);
 	}
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		printf("%s", line);
+		free(line);
+	}
+	close(fd);
 	return (0);
 }
 /*
