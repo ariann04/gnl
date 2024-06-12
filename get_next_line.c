@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:33:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/11 19:16:18 by tblagoev         ###   ########.fr       */
+/*   Updated: 2024/06/12 20:23:41 by tblagoev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char *new_line(char *storage)
 char	*readbuf(int fd, char *storage)
 {
 	char	*buffer;
-	int		status;
+	int	status;
 
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	status = 1;
@@ -58,7 +58,7 @@ char	*readbuf(int fd, char *storage)
 	buffer[0] = '\0';
 	while (status > 0 && !ft_strchr(buffer, '\n'))
 	{
-		status = read (fd, buffer, BUFFER_SIZE);
+		status = read(fd, buffer, BUFFER_SIZE);
 		if (status > 0)
 		{
 			buffer[status] = '\0';
@@ -94,6 +94,36 @@ char	*get_next_line(int fd)
 	return(line);		
 }
 
+int        main(void)
+{
+        int        fd;
+        int        i;
+        int        lines;
+
+        i = 0;
+        lines = 3;
+        fd = open("test.txt", O_RDONLY);
+        if (fd == -1)
+        {
+                perror("\n ERROR \n");
+                exit(1);
+        }
+        else
+                printf("\n SUCCESS fd: %d\n", fd);
+        while (i++ < lines)
+                printf("Line %d: <%s>\n", i, get_next_line(fd));
+        close(fd);
+        return (0);
+}
+
+/*int	main()
+{
+	int	fd = open("text.txt", O_RDONLY);
+	
+	while(fd  )printf("%s\n", get_next_line(fd));
+	printf("%s\n", get_next_line(fd));
+}
+
 int	main()
 {
 	int	fd = open("text.txt", O_RDONLY);
@@ -110,7 +140,7 @@ int	main()
 	}
 	close(fd);
 	return (0);
-}
+}*/
 /*
 
 compilar con las flags -Wall -Wextra -Werror -g3 -fsanitize=address,leak
