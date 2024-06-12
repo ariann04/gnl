@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:33:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/12 20:23:41 by tblagoev         ###   ########.fr       */
+/*   Updated: 2024/06/12 23:09:27 by tblagoev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ char	*cut_storage(char *storage)
 	if (!ptr)
 	{
 		remind = NULL;
-		return (free(storage), NULL);
+		return (/*free(storage),*/ NULL);
 	}
-	len = (ptr - storage) + 1;
+	len = strlen1(storage);
 	remind = ft_substr(storage, len, (ft_strlen(storage) - len));
 	if (!storage)
-		return (free(storage), NULL);
+		return (/*free(storage),*/ NULL);
 	return (remind);
 }
 
@@ -38,8 +38,10 @@ char *new_line(char *storage)
 	int	len;
 
 	ptr = ft_strchr(storage, '\n');
-	len = (ptr - storage) + 1;
-	printf("%i\n", len);
+	len = strlen1(storage);
+	printf("len: %d\n", len);
+	if (len < 0)
+		return (NULL);
 	line = ft_substr(storage, 0, len);
 	if (!line)
 		return (NULL);
@@ -54,8 +56,8 @@ char	*readbuf(int fd, char *storage)
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	status = 1;
 	if (!buffer)
-		return (free(storage), NULL);
-	buffer[0] = '\0';
+		return (/*free(storage),*/ NULL);
+
 	while (status > 0 && !ft_strchr(buffer, '\n'))
 	{
 		status = read(fd, buffer, BUFFER_SIZE);
@@ -65,9 +67,9 @@ char	*readbuf(int fd, char *storage)
 			storage = ft_strjoin(storage, buffer);
 		}
 	}
-	free(buffer);
+	//free(buffer);
 	if (status == -1)
-		return (free(storage), NULL);
+		return (/*free(storage),*/ NULL);
 	return (storage);
 }
 
@@ -87,14 +89,14 @@ char	*get_next_line(int fd)
 	line = new_line(storage);
 	if (!line)
 	{
-		free(storage);
-		return(NULL);
+		//free(storage);
+		return (NULL);
 	}
 	storage = cut_storage(storage);
 	return(line);		
 }
 
-int        main(void)
+/*int        main(void)
 {
         int        fd;
         int        i;
@@ -102,7 +104,7 @@ int        main(void)
 
         i = 0;
         lines = 3;
-        fd = open("test.txt", O_RDONLY);
+        fd = open("text.txt", O_RDONLY);
         if (fd == -1)
         {
                 perror("\n ERROR \n");
@@ -115,7 +117,7 @@ int        main(void)
         close(fd);
         return (0);
 }
-
+*/
 /*int	main()
 {
 	int	fd = open("text.txt", O_RDONLY);
@@ -123,7 +125,7 @@ int        main(void)
 	while(fd  )printf("%s\n", get_next_line(fd));
 	printf("%s\n", get_next_line(fd));
 }
-
+*/
 int	main()
 {
 	int	fd = open("text.txt", O_RDONLY);
@@ -133,14 +135,16 @@ int	main()
 		perror("Error al abrir el archivo");
 		return (1);
 	}
-	while ((line = get_next_line(fd)) != NULL)
+	while (1)
 	{
-		printf("%s", line);
-		free(line);
+		line = get_next_line(fd);
+		printf("%s\n", line);
+		if (line == NULL)
+			break ;
 	}
 	close(fd);
 	return (0);
-}*/
+}
 /*
 
 compilar con las flags -Wall -Wextra -Werror -g3 -fsanitize=address,leak

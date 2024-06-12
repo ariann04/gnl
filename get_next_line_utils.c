@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:10:07 by ls                #+#    #+#             */
-/*   Updated: 2024/06/12 19:58:30 by tblagoev         ###   ########.fr       */
+/*   Updated: 2024/06/12 23:07:09 by tblagoev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,40 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strchr(char *storage, char c)
+char	*ft_strchr(char *str, char c)
 {
 	int	i;
 
 	i = 0;
-	while (storage[i])
+	if (str == NULL)
+		return 0;
+	printf("Str strchar: %s\n", str);
+	while (str[i] != '\0')
 	{
-		if (storage[i] == c)
-			return (storage);
+		if (str[i] == c)
+			return (&str[i]);
 		i++;
 	}
 	if (c == '\0')
-		return (storage);
+		return (&str[i]);
+	return (0);
+}
+
+int	strlen1(char *storage)
+{
+	int	i;
+
+	i = 0;
+	while (*storage)
+	{
+		if (*storage == '\n')
+		{
+			i++;
+			return (i);
+		}
+		storage++;
+		i++;
+	}
 	return (0);
 }
 
@@ -48,18 +69,22 @@ char	*ft_strjoin(char *storage, char *buffer)
 	char	*str;
 	char	*temp;
 
-	if (!storage || !buffer)
+	if (!buffer)
 		return (NULL);
+	if (!storage && *buffer)
+	{
+		storage = malloc(sizeof(char) * 1);
+		storage[0] = '\0';
+	}
 	str = malloc(sizeof(char) *
 			(ft_strlen(buffer) + ft_strlen(storage) + 1));
 	temp = str;
-	printf("%s,\n", storage);
 	while (*storage)
 		*temp++ = *storage++;
 	while (*buffer)
 		*temp++ = *buffer++;
 	*temp = '\0';
-	free(storage);
+	//free(storage);
 	return (str);
 }
 
