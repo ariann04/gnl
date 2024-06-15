@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:44:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/15 01:36:50 by ls               ###   ########.fr       */
+/*   Updated: 2024/06/15 23:26:23 by ls               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ char	*cut_storage(char *storage);
 int	ft_strlen(char *str);
 int	jumplen(char *storage);
 char	*ft_strjoin(char *storage, char *buffer);
-char	*ft_strchr(char *storage, char c);
+char	*ft_strchr(char *s, int c);
 char	*ft_substr(char *storage, int start, int len);
 #endif

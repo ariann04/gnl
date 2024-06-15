@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:33:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/15 01:49:43 by ls               ###   ########.fr       */
+/*   Updated: 2024/06/16 01:46:48 by ls               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@ char	*cut_storage(char *storage)
 	char	*remind;
 	int	len;
 
-	len = jumplen(storage);
+	len = jumplen(storage) + 1;
 	remind = ft_substr(storage, len, (ft_strlen(storage) - len));
-	if (!storage)
-		return (free(storage), NULL);
+	free(storage);
 	return (remind);
 }
 
@@ -30,7 +29,6 @@ char *new_line(char *storage)
 	int	len;
 
 	len = jumplen(storage);
-	printf("len: %d\n", len);
 	if (len < 0)
 		return (NULL);
 	line = ft_substr(storage, 0, len);
