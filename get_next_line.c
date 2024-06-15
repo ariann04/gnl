@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:33:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/12 23:09:27 by tblagoev         ###   ########.fr       */
+/*   Updated: 2024/06/15 01:49:43 by ls               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,22 @@
 
 char	*cut_storage(char *storage)
 {
-	char	*ptr;
 	char	*remind;
 	int	len;
 
-	ptr = ft_strchr(storage, '\n');
-	if (!ptr)
-	{
-		remind = NULL;
-		return (/*free(storage),*/ NULL);
-	}
-	len = strlen1(storage);
+	len = jumplen(storage);
 	remind = ft_substr(storage, len, (ft_strlen(storage) - len));
 	if (!storage)
-		return (/*free(storage),*/ NULL);
+		return (free(storage), NULL);
 	return (remind);
 }
 
 char *new_line(char *storage)
 {
 	char	*line;
-	char	*ptr;
 	int	len;
 
-	ptr = ft_strchr(storage, '\n');
-	len = strlen1(storage);
+	len = jumplen(storage);
 	printf("len: %d\n", len);
 	if (len < 0)
 		return (NULL);
@@ -56,8 +47,8 @@ char	*readbuf(int fd, char *storage)
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	status = 1;
 	if (!buffer)
-		return (/*free(storage),*/ NULL);
-
+		return (free(storage), NULL);
+	buffer[0] = '\0';
 	while (status > 0 && !ft_strchr(buffer, '\n'))
 	{
 		status = read(fd, buffer, BUFFER_SIZE);
@@ -67,9 +58,9 @@ char	*readbuf(int fd, char *storage)
 			storage = ft_strjoin(storage, buffer);
 		}
 	}
-	//free(buffer);
+	free(buffer);
 	if (status == -1)
-		return (/*free(storage),*/ NULL);
+		return (free(storage), NULL);
 	return (storage);
 }
 
@@ -89,7 +80,7 @@ char	*get_next_line(int fd)
 	line = new_line(storage);
 	if (!line)
 	{
-		//free(storage);
+		free(storage);
 		return (NULL);
 	}
 	storage = cut_storage(storage);
@@ -145,8 +136,8 @@ int	main()
 	close(fd);
 	return (0);
 }
-/*
 
+/*
 compilar con las flags -Wall -Wextra -Werror -g3 -fsanitize=address,leak
 
 todo list:

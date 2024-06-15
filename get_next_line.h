@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:44:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/12 23:08:12 by tblagoev         ###   ########.fr       */
+/*   Updated: 2024/06/15 01:36:50 by ls               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*readbuf(int fd, char *storage);
 char	*new_line(char *storage);
 char	*cut_storage(char *storage);
 int	ft_strlen(char *str);
-int	strlen1(char *storage);
+int	jumplen(char *storage);
 char	*ft_strjoin(char *storage, char *buffer);
 char	*ft_strchr(char *storage, char c);
 char	*ft_substr(char *storage, int start, int len);

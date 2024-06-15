@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:10:07 by ls                #+#    #+#             */
-/*   Updated: 2024/06/12 23:07:09 by tblagoev         ###   ########.fr       */
+/*   Updated: 2024/06/15 01:30:03 by ls               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_strchr(char *str, char c)
 	return (0);
 }
 
-int	strlen1(char *storage)
+int	jumplen(char *storage)
 {
 	int	i;
 
@@ -84,7 +84,7 @@ char	*ft_strjoin(char *storage, char *buffer)
 	while (*buffer)
 		*temp++ = *buffer++;
 	*temp = '\0';
-	//free(storage);
+	free(storage);
 	return (str);
 }
 
