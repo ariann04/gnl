@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:33:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/16 01:46:48 by ls               ###   ########.fr       */
+/*   Updated: 2024/06/16 03:28:33 by ls               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,42 @@
 char	*cut_storage(char *storage)
 {
 	char	*remind;
+	//char	*ptr;
 	int	len;
 
-	len = jumplen(storage) + 1;
-	remind = ft_substr(storage, len, (ft_strlen(storage) - len));
+	/*ptr = ft_strchr(storage, '\n');
+	if (!ptr)
+	{
+		remind = NULL;
+		return (free(storage), NULL);
+	}
+	else
+		len = (ptr - storage) + 1;
+	if (!storage[len])
+		return(free(storage), NULL);*/
+	len = jumplen(storage);
+	if (len == -1)
+	{
+		free(storage);
+		return (NULL);
+	}
+	remind = ft_substr(storage, len + 1, (ft_strlen(storage) - len));
 	free(storage);
 	return (remind);
 }
 
-char *new_line(char *storage)
+char	*new_line(char *storage)
 {
 	char	*line;
+	//char	*ptr;
 	int	len;
 
+	/*ptr = ft_strchr(storage, '\n');
+	len = (ptr - storage) + 1;*/
 	len = jumplen(storage);
-	if (len < 0)
+	if (len == -1)
 		return (NULL);
-	line = ft_substr(storage, 0, len);
+	line = ft_substr(storage, 0, len + 1);
 	if (!line)
 		return (NULL);
 	return (line);
@@ -82,7 +101,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	storage = cut_storage(storage);
-	return(line);		
+	return (line);		
 }
 
 /*int        main(void)
@@ -115,26 +134,24 @@ char	*get_next_line(int fd)
 	printf("%s\n", get_next_line(fd));
 }
 */
-int	main()
+int	main(void)
 {
 	int	fd = open("text.txt", O_RDONLY);
 	char	*line;
-	if (fd < 0)
+
+	if (fd == -1)
 	{
-		perror("Error al abrir el archivo");
-		return (1);
+		printf("ERROR\n");
+		return (0);
 	}
-	while (1)
+	while ((line = get_next_line(fd)) != NULL)
 	{
-		line = get_next_line(fd);
-		printf("%s\n", line);
-		if (line == NULL)
-			break ;
+		printf("%s", line);
+		free(line);
 	}
 	close(fd);
 	return (0);
 }
-
 /*
 compilar con las flags -Wall -Wextra -Werror -g3 -fsanitize=address,leak
 

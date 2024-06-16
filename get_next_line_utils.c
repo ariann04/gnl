@@ -6,24 +6,21 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:10:07 by ls                #+#    #+#             */
-/*   Updated: 2024/06/16 01:44:49 by ls               ###   ########.fr       */
+/*   Updated: 2024/06/16 03:35:13 by ls               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(char *str)
+size_t	ft_strlen(char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if (!str)
 		return (0);
-	while (*str != 0)
-	{
+	while (str[i])
 		i++;
-		str++;
-	}
 	return (i);
 }
 
@@ -35,7 +32,7 @@ char	*ft_strchr(char *s, int c)
 	while (s[i])
 	{
 		if (s[i] == (char)c)
-			return(&((char*)s)[i]);
+			return (&((char *)s)[i]);
 		i++;
 	}
 	if ((char)c == '\0')
@@ -49,14 +46,14 @@ int	jumplen(char *storage)
 
 	i = 0;
 	if (!storage)
-		return (0);
+		return (-1);
 	while (storage[i])
 	{
 		if (storage[i] == '\n')
 			return (i);
 		i++;
 	}
-	return (i);
+	return (-1);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -64,7 +61,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*str;
 	size_t	i;
 	size_t	j;
-
 
 	if (!s1)
 	{
@@ -75,7 +71,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
-		return(free(s1), NULL);
+		return (free(s1), NULL);
 	i = -1;
 	while (s1[++i])
 		str[i] = s1[i];
@@ -87,29 +83,29 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (str);
 }
 
-char	*ft_substr(char *storage, int start, int len)
+char	*ft_substr(char *storage, unsigned int start, size_t len)
 {
 	char	*str;
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if (!storage)
-		return (NULL);
+		return (0);
+	if (start > ft_strlen(storage))
+	{
+		str = malloc(sizeof(char) * (1));
+		if (!str)
+			return (NULL);
+		str[0] = '\0';
+		return (str);
+	}
+	if (ft_strlen(storage) - start < len)
+		len = ft_strlen(storage) - start;
 	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
-	while (i < start && *storage)
-	{
-		storage++;
-		i++;
-	}
-	i = 0;
-	while (i < len && *storage)
-	{
-		str[i] = *storage;
-		i++;
-		storage++;
-	}
+	while (start < ft_strlen(storage) && i < len && storage[start])
+		str[i++] = storage[start++];
 	str[i] = '\0';
 	return (str);
 }
