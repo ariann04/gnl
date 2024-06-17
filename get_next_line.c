@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:33:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/17 15:25:00 by ls               ###   ########.fr       */
+/*   Updated: 2024/06/18 00:23:02 by tblagoev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ char	*cut_storage(char *storage)
 	if (len == -1)
 	{
 		free(storage);
+		storage = NULL;
 		return (NULL);
 	}
 	remind = ft_substr(storage, len + 1, (ft_strlen(storage) - len));
 	free(storage);
+	storage = NULL;
 	return (remind);
 }
 
@@ -64,14 +66,11 @@ char	*readbuf(int fd, char *storage)
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	status = 1;
 	if (!buffer)
-		return (free(storage), NULL);
+		return (free(storage), storage = NULL, NULL);
 	buffer[0] = '\0';
 	while (status > 0 && !ft_strchr(buffer, '\n'))
 	{
-		if (BUFFER_SIZE <= 0)
-			return(free(storage), NULL);
-		else
-			status = read(fd, buffer, BUFFER_SIZE);
+		status = read(fd, buffer, BUFFER_SIZE);
 		if (status > 0)
 		{
 			buffer[status] = '\0';
@@ -80,7 +79,7 @@ char	*readbuf(int fd, char *storage)
 	}
 	free(buffer);
 	if (status == -1)
-		return (free(storage), NULL);
+		return (free(storage), storage = NULL, NULL);
 	return (storage);
 }
 
@@ -99,7 +98,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = new_line(storage);
 	if (!line)
-		return (free(storage), NULL);
+		return (free(storage), storage = NULL, NULL);
 	storage = cut_storage(storage);
 	return (line);		
 }
@@ -137,9 +136,10 @@ char	*get_next_line(int fd)
 */
 int	main(void)
 {
-	int	fd = open("text.txt", O_RDONLY);
+	int	fd;
 	char	*line;
 
+	fd = open("text1.txt", O_RDONLY);
 	if (fd == -1)
 	{
 		printf("ERROR\n");
