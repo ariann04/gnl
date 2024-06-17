@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:33:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/16 03:28:33 by ls               ###   ########.fr       */
+/*   Updated: 2024/06/17 15:25:00 by ls               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ char	*readbuf(int fd, char *storage)
 	buffer[0] = '\0';
 	while (status > 0 && !ft_strchr(buffer, '\n'))
 	{
-		status = read(fd, buffer, BUFFER_SIZE);
+		if (BUFFER_SIZE <= 0)
+			return(free(storage), NULL);
+		else
+			status = read(fd, buffer, BUFFER_SIZE);
 		if (status > 0)
 		{
 			buffer[status] = '\0';
@@ -86,7 +89,7 @@ char	*get_next_line(int fd)
 	static char	*storage = NULL;
 	char		*line;
 
-	if (fd < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if ((storage && !ft_strchr(storage, '\n')) || !storage)
 	{
@@ -96,10 +99,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = new_line(storage);
 	if (!line)
-	{
-		free(storage);
-		return (NULL);
-	}
+		return (free(storage), NULL);
 	storage = cut_storage(storage);
 	return (line);		
 }
@@ -110,7 +110,8 @@ char	*get_next_line(int fd)
         int        i;
         int        lines;
 
-        i = 0;
+        
+		i = 0;
         lines = 3;
         fd = open("text.txt", O_RDONLY);
         if (fd == -1)
@@ -142,7 +143,7 @@ int	main(void)
 	if (fd == -1)
 	{
 		printf("ERROR\n");
-		return (0);
+		return (1);
 	}
 	while ((line = get_next_line(fd)) != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:44:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/16 03:32:18 by ls               ###   ########.fr       */
+/*   Updated: 2024/06/17 14:20:10 by ls               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <limits.h>
 
 char	*get_next_line(int fd);
 char	*readbuf(int fd, char *storage);
