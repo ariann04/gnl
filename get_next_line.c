@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:33:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/18 00:23:02 by tblagoev         ###   ########.fr       */
+/*   Updated: 2024/06/18 02:16:13 by ls               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,15 +138,18 @@ int	main(void)
 {
 	int	fd;
 	char	*line;
+	int	i;
 
-	fd = open("text1.txt", O_RDONLY);
+	i = 10;
+	fd = open("1char.txt", O_RDONLY);
 	if (fd == -1)
 	{
 		printf("ERROR\n");
 		return (1);
 	}
-	while ((line = get_next_line(fd)) != NULL)
+	while (i--)
 	{
+		line = get_next_line(fd);
 		printf("%s", line);
 		free(line);
 	}
