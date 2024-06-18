@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:33:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/18 02:16:13 by ls               ###   ########.fr       */
+/*   Updated: 2024/06/18 02:59:15 by tblagoev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,26 @@
 char	*cut_storage(char *storage)
 {
 	char	*remind;
-	//char	*ptr;
+	char	*ptr;
 	int	len;
 
-	/*ptr = ft_strchr(storage, '\n');
+	ptr = ft_strchr(storage, '\n');
 	if (!ptr)
 	{
 		remind = NULL;
-		return (free(storage), NULL);
+		return (free(storage), storage = NULL, NULL);
 	}
 	else
 		len = (ptr - storage) + 1;
 	if (!storage[len])
-		return(free(storage), NULL);*/
-	len = jumplen(storage);
+		return(free(storage), NULL);
+	/*len = jumplen(storage);
 	if (len == -1)
 	{
 		free(storage);
 		storage = NULL;
 		return (NULL);
-	}
+	}*/
 	remind = ft_substr(storage, len + 1, (ft_strlen(storage) - len));
 	free(storage);
 	storage = NULL;
@@ -44,14 +44,14 @@ char	*cut_storage(char *storage)
 char	*new_line(char *storage)
 {
 	char	*line;
-	//char	*ptr;
+	char	*ptr;
 	int	len;
 
-	/*ptr = ft_strchr(storage, '\n');
-	len = (ptr - storage) + 1;*/
-	len = jumplen(storage);
+	ptr = ft_strchr(storage, '\n');
+	len = (ptr - storage) + 1;
+	/*len = jumplen(storage);
 	if (len == -1)
-		return (NULL);
+		return (NULL);*/
 	line = ft_substr(storage, 0, len + 1);
 	if (!line)
 		return (NULL);
