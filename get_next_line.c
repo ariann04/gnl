@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:33:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/18 02:59:15 by tblagoev         ###   ########.fr       */
+/*   Updated: 2024/06/18 06:16:53 by tblagoev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 char	*cut_storage(char *storage)
 {
 	char	*remind;
-	char	*ptr;
+	//char	*ptr;
 	int	len;
 
-	ptr = ft_strchr(storage, '\n');
+	/*ptr = ft_strchr(storage, '\n');
 	if (!ptr)
 	{
 		remind = NULL;
@@ -27,14 +27,14 @@ char	*cut_storage(char *storage)
 	else
 		len = (ptr - storage) + 1;
 	if (!storage[len])
-		return(free(storage), NULL);
-	/*len = jumplen(storage);
+		return(free(storage), NULL);*/
+	len = jumplen(storage);
 	if (len == -1)
 	{
 		free(storage);
 		storage = NULL;
 		return (NULL);
-	}*/
+	}
 	remind = ft_substr(storage, len + 1, (ft_strlen(storage) - len));
 	free(storage);
 	storage = NULL;
@@ -44,14 +44,14 @@ char	*cut_storage(char *storage)
 char	*new_line(char *storage)
 {
 	char	*line;
-	char	*ptr;
+	//char	*ptr;
 	int	len;
 
-	ptr = ft_strchr(storage, '\n');
-	len = (ptr - storage) + 1;
-	/*len = jumplen(storage);
+	/*ptr = ft_strchr(storage, '\n');
+	len = (ptr - storage) + 1;*/
+	len = jumplen(storage);
 	if (len == -1)
-		return (NULL);*/
+		return (NULL);
 	line = ft_substr(storage, 0, len + 1);
 	if (!line)
 		return (NULL);
@@ -133,7 +133,7 @@ char	*get_next_line(int fd)
 	while(fd  )printf("%s\n", get_next_line(fd));
 	printf("%s\n", get_next_line(fd));
 }
-*/
+
 int	main(void)
 {
 	int	fd;
@@ -156,7 +156,7 @@ int	main(void)
 	close(fd);
 	return (0);
 }
-/*
+
 compilar con las flags -Wall -Wextra -Werror -g3 -fsanitize=address,leak
 
 todo list:
