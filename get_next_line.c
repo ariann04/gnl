@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:33:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/18 06:44:16 by ls               ###   ########.fr       */
+/*   Updated: 2024/06/18 17:16:15 by ls               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,8 @@
 char	*cut_storage(char *storage)
 {
 	char	*remind;
-	//char	*ptr;
-	int	len;
+	int		len;
 
-	/*ptr = ft_strchr(storage, '\n');
-	if (!ptr)
-	{
-		remind = NULL;
-		return (free(storage), storage = NULL, NULL);
-	}
-	else
-		len = (ptr - storage) + 1;
-	if (!storage[len])
-		return(free(storage), NULL);*/
 	len = jumplen(storage);
 	if (len == -1)
 	{
@@ -44,11 +33,8 @@ char	*cut_storage(char *storage)
 char	*new_line(char *storage)
 {
 	char	*line;
-	//char	*ptr;
-	int	len;
+	int		len;
 
-	/*ptr = ft_strchr(storage, '\n');
-	len = (ptr - storage) + 1;*/
 	len = jumplen(storage);
 	if (len == -1)
 		return (NULL);
@@ -61,7 +47,7 @@ char	*new_line(char *storage)
 char	*readbuf(int fd, char *storage)
 {
 	char	*buffer;
-	int	status;
+	int		status;
 
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	status = 1;
@@ -100,7 +86,7 @@ char	*get_next_line(int fd)
 	if (!line)
 		return (free(storage), storage = NULL, NULL);
 	storage = cut_storage(storage);
-	return (line);		
+	return (line);
 }
 
 /*int        main(void)
@@ -136,9 +122,9 @@ char	*get_next_line(int fd)
 */
 int	main(void)
 {
-	int	fd;
+	int		fd;
 	char	*line;
-	int	i;
+	int		i;
 
 	i = 10;
 	fd = open("1char.txt", O_RDONLY);
