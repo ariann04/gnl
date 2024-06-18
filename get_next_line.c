@@ -6,7 +6,7 @@
 /*   By: ls <marvin@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:33:02 by ls                #+#    #+#             */
-/*   Updated: 2024/06/18 06:16:53 by tblagoev         ###   ########.fr       */
+/*   Updated: 2024/06/18 06:44:16 by ls               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ char	*get_next_line(int fd)
 	while(fd  )printf("%s\n", get_next_line(fd));
 	printf("%s\n", get_next_line(fd));
 }
-
+*/
 int	main(void)
 {
 	int	fd;
@@ -156,7 +156,7 @@ int	main(void)
 	close(fd);
 	return (0);
 }
-
+/*
 compilar con las flags -Wall -Wextra -Werror -g3 -fsanitize=address,leak
 
 todo list:
